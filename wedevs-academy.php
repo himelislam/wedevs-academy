@@ -6,7 +6,7 @@
  * Version:           1.10.3
  * Requires at least: 5.2
  * Requires PHP:      7.2
- * Author:            Himel Islam   
+ * Author:            Muhaiminul Islam    
  * Author URI:        https://himelislam.com/
  * License:           GPL v2 or later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
