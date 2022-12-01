@@ -5,7 +5,7 @@
     "license": "GPLv2",
     "autoload": {
         "psr-4": {
-            "wedevs\\Academy\\": "includes"
+            "WeDevs\\Academy\\": "includes/"
         }
     },
     "authors": [

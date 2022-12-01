@@ -19,7 +19,7 @@
     exit;
  }
  
- require_once __DIR__ . 'vendor/autoload.php';
+ require_once __DIR__ . '/vendor/autoload.php';
 
   final class WeDevs_Academy{
 
@@ -66,7 +66,7 @@
      * @return void
      */
     public function init_plugin(){
-
+      // new WeDevs\Academy\Admin\Menu();
     }
 
     public function activate(){
