@@ -1,0 +1,19 @@
+{
+    "name": "himel/wedevs-academy",
+    "description": "A Tutorial Plugin",
+    "type": "wordpress-plugin",
+    "license": "GPLv2",
+    "autoload": {
+        "psr-4": {
+            "wedevs\\Academy\\": "includes"
+        }
+    },
+    "authors": [
+        {
+            "name": "himelislam",
+            "email": "himel7100@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}

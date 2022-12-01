@@ -18,20 +18,28 @@
  if(!defined ('ABSPATH')){
     exit;
  }
+ 
+ require_once __DIR__ . 'vendor/autoload.php';
 
- /**
-  * The Main Plugin Class
-  */
+  final class WeDevs_Academy{
 
-  class WeDevs_Academy{
 
-    function __construct()
+    const version = '1.0';
+
+    /**
+     * Class Constrctor
+     */
+    private function __construct()
     {
-        
+        $this->define_constants();
+
+        register_activation_hook(__FILE__, [$this, 'activate']);
+
+        add_action('plugin_loaded', [$this , 'init_plugin']);
     }
 
     /** 
-    * To Initial an instence
+    * To Initial an single instence
     */
     public static function init(){
         static $instance = false;
@@ -42,4 +50,48 @@
 
         return $instance;
     }
+
+    public function define_constants(){
+      define('WD_ACADEMY_VERSION', self::version);
+      define('WD_ACADEMY_FILE', __FILE__);
+      define('WD_ACADEMY_PATH', __DIR__);
+      define('WD_ACADEMY_URL', plugins_url('', WD_ACADEMY_FILE));
+      define('WD_ACADEMY_ASSETS', WD_ACADEMY_URL . 'assets');
+    }
+
+
+    /**
+     * Initialize the plugin
+     *
+     * @return void
+     */
+    public function init_plugin(){
+
+    }
+
+    public function activate(){
+
+      $installed = get_option('wd_academy_installed');
+
+      if(! $installed){
+        update_option('wd_academy_installed', time());  
+      }
+
+      update_option('wd_academy_version', WD_ACADEMY_VERSION);
+    }
+
   }
+  
+  /**
+   * Initialize the main plugin
+   */
+
+  function wedevs_academy(){
+    return WeDevs_Academy::init();
+  }
+
+  /**
+   * kick off the plugin
+   */
+
+   wedevs_academy();
