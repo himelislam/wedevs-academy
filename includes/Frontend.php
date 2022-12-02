@@ -2,10 +2,10 @@
 
 namespace WeDevs\Academy;
 
-class Admin {
+class Frontend {
 
     function __construct()
     {
-        new Admin\Menu();
+        new Frontend\Shortcode();
     }
 }

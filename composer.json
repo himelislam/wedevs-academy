@@ -1,13 +1,8 @@
 {
     "name": "himel/wedevs-academy",
-    "description": "A Tutorial Plugin",
+    "description": "A Tutorial",
     "type": "wordpress-plugin",
     "license": "GPLv2",
-    "autoload": {
-        "psr-4": {
-            "WeDevs\\Academy\\": "includes/"
-        }
-    },
     "authors": [
         {
             "name": "himelislam",
@@ -15,5 +10,11 @@
         }
     ],
     "minimum-stability": "dev",
-    "require": {}
+    "require": {},
+    "autoload" : {
+        "psr4" : {
+            "WeDevs\\Academy" : "includes/"
+        },
+        "files" : []
+    }
 }

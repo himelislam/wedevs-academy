@@ -15,11 +15,13 @@
  * Domain Path:       /languages
  */
 
- if(!defined ('ABSPATH')){
+ if( !defined ('ABSPATH')){
     exit;
- }
+  }
+  
  
  require_once __DIR__ . '/vendor/autoload.php';
+
 
   final class WeDevs_Academy{
 
@@ -33,9 +35,9 @@
     {
         $this->define_constants();
 
-        register_activation_hook(__FILE__, [$this, 'activate']);
+        register_activation_hook( __FILE__ , [$this, 'activate']);
 
-        add_action('plugin_loaded', [$this , 'init_plugin']);
+        add_action('plugins_loaded', [ $this , 'init_plugin']);
     }
 
     /** 
@@ -44,7 +46,7 @@
     public static function init(){
         static $instance = false;
 
-        if(!$instance){
+        if( ! $instance ){
             $instance = new self();
         }
 
@@ -53,10 +55,10 @@
 
     public function define_constants(){
       define('WD_ACADEMY_VERSION', self::version);
-      define('WD_ACADEMY_FILE', __FILE__);
-      define('WD_ACADEMY_PATH', __DIR__);
+      define('WD_ACADEMY_FILE', __FILE__ );
+      define('WD_ACADEMY_PATH', __DIR__ );
       define('WD_ACADEMY_URL', plugins_url('', WD_ACADEMY_FILE));
-      define('WD_ACADEMY_ASSETS', WD_ACADEMY_URL . 'assets');
+      define('WD_ACADEMY_ASSETS', WD_ACADEMY_URL . '/assets');
     }
 
 
@@ -66,14 +68,21 @@
      * @return void
      */
     public function init_plugin(){
-      // new WeDevs\Academy\Admin\Menu();
+
+      if(is_admin()){
+        new WeDevs\Academy\Admin();
+      }
+      else{
+        new WeDevs\Academy\Frontend();
+      }
+
     }
 
     public function activate(){
 
       $installed = get_option('wd_academy_installed');
 
-      if(! $installed){
+      if( ! $installed){  
         update_option('wd_academy_installed', time());  
       }
 
