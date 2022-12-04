@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name:       My WeDevs Academy
+ * Plugin Name:       My WeDevs Academy main
  * Plugin URI:        https://example.com/plugins/the-basics/
  * Description:       A normal description for wedevs academy plugin.
  * Version:           1.10.3
@@ -18,9 +18,13 @@
  if( !defined ('ABSPATH')){
     exit;
   }
-  
+ 
+  use WeDevs\Academy\Frontend;
+  use WeDevs\Academy\Admin;
  
  require_once __DIR__ . '/vendor/autoload.php';
+ require_once __DIR__ . '/includes/Admin.php';
+ require_once __DIR__ . '/includes/Frontend.php';
 
 
   final class WeDevs_Academy{
