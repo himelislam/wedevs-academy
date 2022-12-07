@@ -1,6 +1,8 @@
 <div class="wrap">
     <h1><?php _e( 'New Address Book', 'wedevs-academy') ?></h1>
 
+    <?php var_dump($this->errors); ?>
+
     <form action="" method="post">
         <table>
             <tbody>
@@ -10,6 +12,7 @@
                     </th>
                     <td>
                         <input type="text" name="name" id="name" class="regular-text" value="">
+                        <p class="description"> <?php echo !empty($this->errors['name']) ? $this->errors['name'] : '' ?></p>
                     </td>
                 </tr>
                 <tr>
@@ -26,6 +29,7 @@
                     </th>
                     <td>
                         <input type="text" name="phone" id="phone" class="regular-text" value="">
+                        <p class="description"> <?php echo !empty($this->errors['phone']) ? $this->errors['phone'] : '' ?></p>
                     </td>
                 </tr>
             </tbody> 

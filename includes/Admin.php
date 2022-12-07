@@ -7,13 +7,15 @@ require_once __DIR__ . '/Admin/Menu.php';
 class Admin {
 
     function __construct(){
-        $this->dispatch_actions();
+        $addressbook = new Admin\Addressbook();
 
-        new Admin\Menu();
+        $this->dispatch_actions($addressbook);
+        
+
+        new Admin\Menu($addressbook);
     }
 
-    public function dispatch_actions(){
-        $addressbook = new Admin\Addressbook();
+    public function dispatch_actions($addressbook){
         
         add_action('admin_init', [$addressbook, 'form_handler']);
     }
