@@ -2,14 +2,19 @@
 
 namespace WeDevs\Academy\Admin;
 
+use WeDevs\Academy\Traits\Form_Error;
+
+require_once '/xampp/htdocs/wordpress/wp-content/plugins/wedevs-academy/includes/Traits/Form_Error.php';
 
 
 class Addressbook {
 
-    public $errors = [];
+
+    use Form_Error;
 
     public function plugin_page(){
         $action = isset( $_GET['action']) ? $_GET['action'] : 'list';
+        $id = isset($_GET['id']) ? intval( $_GET['id']) : 0;
 
         switch( $action ){
             case 'new' :  
@@ -17,6 +22,7 @@ class Addressbook {
             break;
 
             case 'edit' :
+            $address =  wd_ac_get_address($id);
             $template = __DIR__ . '/views/address-edit.php';
             break;
 
@@ -48,6 +54,7 @@ class Addressbook {
             wp_die( 'Are you Cheating?' );
         }
 
+        $id = isset($_POST['id']) ? intval($_POST['id']) : 0;
         $name = isset($_POST['name']) ? sanitize_text_field( $_POST['name'] ) : '';
         $address = isset($_POST['address']) ? sanitize_textarea_field( $_POST['address'] ) : '';
         $phone = isset($_POST['phone']) ? sanitize_text_field( $_POST['phone'] ) : '';
@@ -63,18 +70,30 @@ class Addressbook {
         if(!empty($this->errors)){
             return;
         }
-        
-        $insert_id = wd_ac_insert_address([
+
+        $args = [
             'name' => $name,
             'address' => $address,
             'phone' => $phone
-        ]);
+        ];
+        
+        if($id){
+            $args['id'] = $id;
+        }
+
+        $insert_id = wd_ac_insert_address($args);
 
         if( is_wp_error( $insert_id )){
             wp_die($insert_id->get_error_message());
         }
 
-        $redirected_to = admin_url( 'admin.php?page=wedevs-academy&inserted=true');
+        if($id){
+            $redirected_to = admin_url( 'admin.php?page=wedevs-academy&action=edit&address-updated=true&id=' . $id);
+        }
+        else{
+            $redirected_to = admin_url( 'admin.php?page=wedevs-academy&inserted=true');
+        }
+
         wp_redirect( $redirected_to );
 
         // exit;
@@ -83,5 +102,5 @@ class Addressbook {
         var_dump($_POST);
         exit;
 
-    }
+    } 
 }

@@ -5,6 +5,12 @@
 
     <a class="page-title-action" href="<?php echo admin_url('admin.php?page=wedevs-academy&action=new') ?>"><?php _e('Add New', 'wedevs-academy') ?></a>
 
+    <?php if(isset($_GET['inserted'])){ ?>
+        <div class="notice notice-success">
+            <p><?php _e('Address has been added successfully', 'wedevs-academy') ?></p>
+        </div>
+    <?php } ?>
+
     <form action="" method="post">
         <?php
         $table = new \WeDevs\Academy\Admin\Address_List();
