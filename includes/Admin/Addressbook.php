@@ -99,8 +99,34 @@ class Addressbook {
         // exit;
 
 
-        var_dump($_POST);
+        // var_dump($_POST);
         exit;
 
     } 
+
+    public function delete_address(){
+        
+        if( ! wp_verify_nonce( $_REQUEST['_wpnonce'], 'wd-ac-delete-address')){
+            wp_die( 'Are You Cheating??' );
+        }
+
+        if(! current_user_can('manage_options')){
+            wp_die( 'Are you Cheating?' );
+        }
+
+        $id = isset($_REQUEST['id']) ? intval($_REQUEST['id']) : 0;
+
+        if ( wd_ac_delete_address($id )){
+            $redirected_to = admin_url('admin.php?page=wedevs-academy&address-deleted=true');
+        }
+        else{
+            $redirected_to = admin_url('admin.php?page=wedevs-academy&address-deleted=false');
+        }
+
+        var_dump(wd_ac_delete_address($id ));
+
+        wp_redirect( $redirected_to );
+        
+        exit;
+    }
 }
