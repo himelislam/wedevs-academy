@@ -133,18 +133,18 @@ function wd_ac_get_address($id)
 
 
 /**
- * Delete an Address
+ * Delete an address
  *
- * @param int $id
- * @return int/boolean 
+ * @param  int $id
+ *
+ * @return int|boolean
  */
-function wd_ac_delete_address($id)
-{
+function wd_ac_delete_address( $id ) {
     global $wpdb;
 
     return $wpdb->delete(
         $wpdb->prefix . 'ac_addresses',
-        ['id' => $id],
-        ['%d']
+        [ 'id' => $id ],
+        [ '%d' ]
     );
 }

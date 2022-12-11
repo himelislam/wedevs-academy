@@ -10,6 +10,9 @@ class Shortcode {
     }
 
     public function render_shortcode( $atts, $content = ''){
-        return 'Hello From Shortcode';
+        wp_enqueue_script( 'academy-script');
+        wp_enqueue_style( 'academy-style');
+
+        return '<div class="academy-shortcode">Hello From Shortcode</div>';
     }
 }

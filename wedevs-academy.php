@@ -26,6 +26,7 @@
  require_once __DIR__ . '/includes/Admin.php';
  require_once __DIR__ . '/includes/Frontend.php';
  require_once __DIR__ . '/includes/Installer.php';
+ require_once __DIR__ . '/includes/Assets.php';
 
 
   final class WeDevs_Academy{
@@ -73,6 +74,8 @@
      * @return void
      */
     public function init_plugin(){
+
+      new WeDevs\Academy\Assets();
 
       if(is_admin()){
         new WeDevs\Academy\Admin();

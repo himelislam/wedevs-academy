@@ -104,29 +104,25 @@ class Addressbook {
 
     } 
 
-    public function delete_address(){
-        
-        if( ! wp_verify_nonce( $_REQUEST['_wpnonce'], 'wd-ac-delete-address')){
-            wp_die( 'Are You Cheating??' );
+    public function delete_address() {
+
+        if ( ! wp_verify_nonce( $_REQUEST['_wpnonce'], 'wd-ac-delete-address' ) ) {
+            wp_die( 'Are you cheating?' );
         }
 
-        if(! current_user_can('manage_options')){
-            wp_die( 'Are you Cheating?' );
+        if ( ! current_user_can( 'manage_options' ) ) {
+            wp_die( 'Are you cheating?' );
         }
 
-        $id = isset($_REQUEST['id']) ? intval($_REQUEST['id']) : 0;
+        $id = isset( $_REQUEST['id'] ) ? intval( $_REQUEST['id'] ) : 0;
 
-        if ( wd_ac_delete_address($id )){
-            $redirected_to = admin_url('admin.php?page=wedevs-academy&address-deleted=true');
+        if ( wd_ac_delete_address( $id ) ) {
+            $redirected_to = admin_url( 'admin.php?page=wedevs-academy&address-deleted=true' );
+        } else {
+            $redirected_to = admin_url( 'admin.php?page=wedevs-academy&address-deleted=false' );
         }
-        else{
-            $redirected_to = admin_url('admin.php?page=wedevs-academy&address-deleted=false');
-        }
-
-        var_dump(wd_ac_delete_address($id ));
 
         wp_redirect( $redirected_to );
-        
         exit;
     }
 }
