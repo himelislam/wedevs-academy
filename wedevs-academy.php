@@ -27,6 +27,7 @@
  require_once __DIR__ . '/includes/Frontend.php';
  require_once __DIR__ . '/includes/Installer.php';
  require_once __DIR__ . '/includes/Assets.php';
+ require_once __DIR__ . '/includes/Ajax.php';
 
 
   final class WeDevs_Academy{
@@ -76,6 +77,10 @@
     public function init_plugin(){
 
       new WeDevs\Academy\Assets();
+
+      if(defined('DOING_AJAX') && DOING_AJAX ){
+        new WeDevs\Academy\Ajax();
+      }
 
       if(is_admin()){
         new WeDevs\Academy\Admin();
